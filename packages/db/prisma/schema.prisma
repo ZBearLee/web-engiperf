@@ -1,0 +1,37 @@
+// 数据源设计说明（面向性能优化 demo）：
+// - Product 表是 10 万级数据的主表，用于虚拟列表、分页、排序等性能场景
+// - 多列索引覆盖常见查询模式（分类过滤、价格排序、时间排序）
+// - price 用 Float 而非 Decimal，序列化 JSON 时保持数字类型，方便前端直接消费
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProductStatus {
+  ACTIVE
+  LOW_STOCK
+  DISCONTINUED
+}
+
+model Product {
+  id        Int          @id @default(autoincrement())
+  sku       String       @unique
+  name      String
+  category  String
+  price     Float
+  stock     Int
+  rating    Float
+  status    ProductStatus @default(ACTIVE)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  @@index([category])
+  @@index([price])
+  @@index([createdAt])
+  @@index([category, price])
+}

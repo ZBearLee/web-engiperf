@@ -1,0 +1,12 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+# 允许这些包的构建脚本执行（避免 [ERR_PNPM_IGNORED_BUILDS]）
+# 后续按需补充，例如 @prisma/client、sharp、@swc/core 等
+onlyBuiltDependencies:
+  - esbuild
+  - prisma
+  - '@prisma/client'
+  - '@prisma/engines'
+  - '@parcel/watcher'

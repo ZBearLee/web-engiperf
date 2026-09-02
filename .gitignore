@@ -1,0 +1,43 @@
+# personal docs
+myDocs/
+
+# deps
+node_modules
+.pnpm-store
+
+# build outputs
+dist
+build
+.next
+.nuxt
+.cache
+.turbo
+*.tsbuildinfo
+
+# env
+.env
+.env.local
+.env.*.local
+
+# db
+*.db
+*.db-journal
+prisma/dev.db
+prisma/dev.db-journal
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# os
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/*
+!.vscode/settings.json
+.idea
+
+# docker volumes
+postgres-data
