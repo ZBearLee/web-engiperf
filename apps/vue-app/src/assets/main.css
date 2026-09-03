@@ -1,0 +1,91 @@
+/* ===== 全局样式与布局控制 =====
+ * 布局原则（PC 端）：
+ * 1. 骨架（侧边栏/顶栏）固定，页面级永不滚动
+ * 2. 只有内容区一个滚动容器，滚动条隐藏
+ * 3. 卡片圆角统一 12px，区块间距统一 16px，紧凑呼吸感
+ */
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family:
+    'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: #f0f2f5;
+  color: #1f2937;
+}
+
+/* 内容区滚动条隐藏（保留滚动能力） */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* 代码块细滚动条 */
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #4b5563 transparent;
+}
+
+.thin-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 3px;
+}
+
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #f3f4f6;
+  color: #d6336c;
+  font-size: 0.88em;
+}
+
+/* ===== demo 页通用卡片风格（供各专题页复用）===== */
+.demo-block {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+
+  .demo-block__title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* 行高压到 1：色条高度用 1em 与文字严格等高，视觉上完全居中 */
+    line-height: 1;
+
+    /* 标题前的小色条 */
+    &::before {
+      content: '';
+      width: 3px;
+      height: 1em;
+      border-radius: 2px;
+      background: #409eff;
+      flex-shrink: 0;
+    }
+  }
+}

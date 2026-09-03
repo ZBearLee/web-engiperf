@@ -1,11 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+/**
+ * 应用根组件：只负责渲染路由出口。
+ * 布局（侧边栏/顶栏）在 layouts/BasicLayout.vue，由路由树的根路由引用 —— App 保持零业务。
+ */
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <RouterView />
 </template>
-
-<style scoped></style>
