@@ -75,6 +75,7 @@ watch(
       ref="menuRef"
       :default-active="activeIndex"
       :default-openeds="opened"
+      :unique-opened="true"
       router
       class="menu"
     >

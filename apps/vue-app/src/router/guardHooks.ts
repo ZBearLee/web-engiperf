@@ -24,7 +24,9 @@ export function guardFormBeforeEnter(to: RouteLocationNormalized) {
 export async function guardFormBeforeRouteLeave(
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
-  options: { isDirty: () => boolean; confirm: () => Promise<void> },
+  // confirm 用 unknown：调用方只关心 resolve（确认）/ reject（取消），不关心返回值，
+  // 兼容 ElMessageBox.confirm() 这类返回 Promise<MessageBoxData> 的实现
+  options: { isDirty: () => boolean; confirm: () => Promise<unknown> },
 ) {
   pushGuardLog('③ beforeRouteLeave（组件内）', from.path, to.path)
   if (!options.isDirty()) return true

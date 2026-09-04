@@ -10,13 +10,19 @@ export default [
     path: '/engineering',
     component: BasicLayout,
     redirect: '/engineering/components',
-    meta: { icon: '', order: 2 },
+    meta: { title: '前端工程化', icon: '🛠️', order: 2 },
     children: [
       {
         path: 'components',
         name: 'component-design',
-        component: () => import('@/views/engineering/ComponentDesign.vue'),
-        meta: { title: '组件封装', order: 1 },
+        component: () => import('@/views/engineering/component-design/ComponentDesign.vue'),
+        meta: { title: '组件封装', icon: '', order: 1 },
+      },
+      {
+        path: 'testing',
+        name: 'auto-testing',
+        component: () => import('@/views/engineering/testing/Testing.vue'),
+        meta: { title: '自动化测试', icon: '', order: 2 },
       },
     ],
   },

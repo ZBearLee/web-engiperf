@@ -1,0 +1,6 @@
+// 后端：用假 Prisma 替身，不连真数据库
+const prismaMock = { product: { findMany: vi.fn() }, $transaction: vi.fn() }
+
+// 前端：用假确认框替身，不弹真 Element Plus 弹窗
+const confirmLeave = vi.fn().mockResolvedValue(undefined) // 模拟"用户点了离开"
+const confirmStay = vi.fn().mockRejectedValue(new Error()) // 模拟"用户点了留下"

@@ -1,0 +1,8 @@
+// vitest.config.ts
+export default defineConfig({
+  test: {
+    // 让 Element Plus 走 Vite 转换，避免 Node 原生加载 base.css 报
+    // "Unknown file extension .css"
+    server: { deps: { inline: ['element-plus'] } },
+  },
+})

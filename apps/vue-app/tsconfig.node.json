@@ -20,6 +20,10 @@
     // Disable emitting output during `vue-tsc --build`, which is used for type-checking only.
     "noEmit": true,
 
+    // 允许 import './vite.config.ts' 带 .ts 扩展名（Vite 的 configLoader: 'native' 要求显式扩展名）。
+    // 前提是本配置 noEmit: true（allowImportingTsExtensions 只在 noEmit/emitDeclarationOnly 下可用）
+    "allowImportingTsExtensions": true,
+
     // `vue-tsc --build` produces a .tsbuildinfo file for incremental type-checking.
     // Specified here to keep it out of the root directory.
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo"

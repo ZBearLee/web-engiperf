@@ -17,7 +17,7 @@ export default [
         path: 'home',
         name: 'home',
         component: () => import('@/views/home/HomeView.vue'),
-        meta: { title: '首页', icon: '', order: 0 },
+        meta: { title: '首页', icon: '🏠', order: 0 },
       },
     ],
   },

@@ -116,7 +116,7 @@ const layerRows = [
       </HintText>
       <CodeBlock :code="controlledCode" />
       <HintText>
-        本项目真实案例：el-tabs 的 v-model 是受控（RouteTopic 用它同步 URL）； el-input 不绑 v-model
+        本项目真实案例：el-tabs 的 v-model 是受控（Routes 用它同步 URL）； el-input 不绑 v-model
         也能打字是非受控。判断标准：<strong>这个状态的变更需要通知外界吗</strong>
       </HintText>
     </DemoBlock>

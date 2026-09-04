@@ -49,6 +49,6 @@ describe('onBeforeRouteLeave 组件内守卫', () => {
       makeRoute('/architecture/routes/guards/form'),
       { isDirty: () => false, confirm: vi.fn() },
     )
-    expect(getGuardLogs()[0].hook).toContain('beforeRouteLeave')
+    expect(getGuardLogs()[0]?.hook).toContain('beforeRouteLeave')
   })
 })

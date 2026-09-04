@@ -1,0 +1,23 @@
+// guardHooks.ts —— 纯函数，不依赖 Vue 组件、不依赖 Element Plus
+export async function guardFormBeforeRouteLeave(
+  to,
+  from,
+  options: { isDirty: () => boolean; confirm: () => Promise<void> },
+) {
+  pushGuardLog('③ beforeRouteLeave（组件内）', from.path, to.path)
+  if (!options.isDirty()) return true
+  try {
+    await options.confirm()
+    return true
+  } catch {
+    return false
+  }
+}
+
+// GuardForm.vue —— 组件里把真实状态/弹窗传进去
+onBeforeRouteLeave((to, from) =>
+  guardFormBeforeRouteLeave(to, from, {
+    isDirty: dirty,
+    confirm: () => ElMessageBox.confirm('表单有未保存的修改，确定离开吗？', ...),
+  }),
+)

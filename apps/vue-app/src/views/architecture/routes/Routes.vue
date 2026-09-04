@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import PageCard from '@/components/PageCard.vue'
 import { useSyncQueryTab } from '@/composables/useSyncQueryTab'
-import BasicPanel from './routes/BasicPanel.vue'
-import GuardsPanel from './routes/GuardsPanel.vue'
-import AdvancedPanel from './routes/AdvancedPanel.vue'
+import BasicPanel from './_components/BasicPanel.vue'
+import GuardsPanel from './_components/GuardsPanel.vue'
+import AdvancedPanel from './_components/AdvancedPanel.vue'
 
 /**
  * 路由专题容器：顶部 el-tabs 切换三个子面板。

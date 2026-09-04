@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import PageCard from '@/components/PageCard.vue'
 import { useSyncQueryTab } from '@/composables/useSyncQueryTab'
-import BasicsPanel from './component/BasicsPanel.vue'
-import DesignPanel from './component/DesignPanel.vue'
-import PerfPanel from './component/PerfPanel.vue'
-import AdvancedPanel from './component/AdvancedPanel.vue'
+import BasicsPanel from './_components/BasicsPanel.vue'
+import DesignPanel from './_components/DesignPanel.vue'
+import PerfPanel from './_components/PerfPanel.vue'
+import AdvancedPanel from './_components/AdvancedPanel.vue'
 
 /**
  * 组件封装专题：四层知识体系（核心基础 → 进阶设计 → 性能优化 → 高级特性与坑点）。

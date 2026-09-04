@@ -1,6 +1,6 @@
 <!-- 动态组件 + KeepAlive：Tab 切换保状态（RouteTopic 的 tabs 就是 component :is） -->
 <RouterView v-slot="{ Component }">
-  <KeepAlive :include="['RouteTopic', 'UserDetail']">
+  <KeepAlive :include="['Routes', 'UserDetail']">
     <component :is="Component" />
   </KeepAlive>
 </RouterView>

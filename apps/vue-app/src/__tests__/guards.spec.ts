@@ -29,6 +29,6 @@ describe('beforeEnter 路由独享守卫', () => {
 
   it('拦截时会向“时序日志”写入一条 beforeEnter 记录', () => {
     guardFormBeforeEnter(makeTo({}))
-    expect(getGuardLogs()[0].hook).toContain('beforeEnter')
+    expect(getGuardLogs()[0]?.hook).toContain('beforeEnter')
   })
 })
