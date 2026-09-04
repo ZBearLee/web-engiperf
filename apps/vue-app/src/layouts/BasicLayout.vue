@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SideMenu from './components/SideMenu.vue'
-import Breadcrumb from './components/Breadcrumb.vue'
+import BreadcrumbNav from './components/BreadcrumbNav.vue'
 
 /**
  * 基础布局：侧边栏 + 顶栏（面包屑）+ 内容区。
@@ -14,7 +14,7 @@ import Breadcrumb from './components/Breadcrumb.vue'
     <SideMenu />
     <div class="main">
       <header class="header">
-        <Breadcrumb />
+        <BreadcrumbNav />
       </header>
       <main class="content hide-scrollbar">
         <RouterView />

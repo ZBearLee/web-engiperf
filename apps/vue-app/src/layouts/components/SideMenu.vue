@@ -55,9 +55,13 @@ const opened = computed(() => {
   return top ? [top.index] : []
 })
 // 导航变化时展开所属分类（default-openeds 只在挂载时生效，路由跳转需手动 open）
-watch(opened, ([top]) => {
-  if (top) menuRef.value?.open(top)
-}, { immediate: true })
+watch(
+  opened,
+  ([top]) => {
+    if (top) menuRef.value?.open(top)
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
