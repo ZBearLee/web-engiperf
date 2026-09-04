@@ -11,6 +11,10 @@ export function setupGuards(router: Router) {
     document.title = `${String(to.meta.title ?? 'demo')} · web-engiperf`
   })
 
+  router.beforeResolve((to, from) => {
+    pushGuardLog('④ beforeResolve（全局解析）', from.path, to.path)
+  })
+
   router.afterEach((to, from) => {
     pushGuardLog('⑤ afterEach（全局后置）', from.path, to.path)
   })

@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router'
 import BasicLayout from '@/layouts/BasicLayout.vue'
+import { pushGuardLog } from '@/router/guardLog'
 
 /**
  * 前端架构模块路由（对应侧边栏"前端架构"菜单）
@@ -37,6 +38,7 @@ export default [
             meta: { title: '组件内守卫实验', hidden: true },
             // 路由独享守卫 beforeEnter：只拦截本路由。演示：不带 ?vip=1 访问被重定向回守卫 tab
             beforeEnter: (to) => {
+              pushGuardLog('② beforeEnter（路由独享）', to.redirectedFrom?.path ?? to.path, to.path)
               if (to.query.vip !== '1') {
                 return { path: '/architecture/routes', query: { tab: 'guards', blocked: '1' } }
               }
