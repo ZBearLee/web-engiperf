@@ -12,7 +12,7 @@
     }
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "prisma generate && tsc -p tsconfig.json",
     "generate": "prisma generate",
     "migrate": "prisma migrate dev",
     "db:push": "prisma db push",
