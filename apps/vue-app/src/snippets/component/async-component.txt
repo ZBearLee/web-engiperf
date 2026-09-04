@@ -1,0 +1,19 @@
+<!-- 重型组件（富文本、图表库）按需加载，首屏不打包 -->
+<script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
+
+// 精细配置版：加载中/失败/超时都有兜底
+const HeavyEditor = defineAsyncComponent({
+  loader: () => import('./HeavyEditor.vue'),   // 真正的动态 import，代码分割的粒度单位
+  loadingComponent: Spinner,
+  errorComponent: ErrorFallback,
+  delay: 200,        // 200ms 内加载完成就不闪 loading（防闪烁）
+  timeout: 10000,    // 超时走 errorComponent
+})
+</script>
+
+<!-- Suspense：异步组件的编排层，等所有异步依赖就绪再整体渲染 -->
+<Suspense>
+  <template #default><AsyncDashboard /></template>
+  <template #fallback><Skeleton /></template>
+</Suspense>

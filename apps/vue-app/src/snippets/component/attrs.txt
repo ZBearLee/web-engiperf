@@ -1,0 +1,17 @@
+<!-- 未声明为 props 的属性全部进 $attrs：class / style / id / 原生事件 / aria-* -->
+<script setup lang="ts">
+import { useAttrs } from 'vue'
+const attrs = useAttrs() // 继承自模板的 class="mt-4" placeholder="..." 都在这
+</script>
+
+<script lang="ts">
+// 单文件里用普通 <script> 块关闭自动继承（<script setup> 无法直接导出选项）
+export default { inheritAttrs: false }
+</script>
+
+<template>
+  <!-- inheritAttrs: false 后手动指定透传目标（比如透传给 input 而不是根 div） -->
+  <div class="my-input">
+    <input v-bind="attrs" />
+  </div>
+</template>

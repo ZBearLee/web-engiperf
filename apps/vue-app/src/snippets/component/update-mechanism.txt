@@ -1,0 +1,14 @@
+// 理解响应式更新的两条链路，才能理解组件为什么"不必要地"重渲染：
+// 1. ref/reactive 依赖收集 → 2. 组件 render 函数重新执行 → 3. 新旧 vnode diff → 4. DOM patch
+//    优化就是砍这条链路的每一环
+
+// nextTick：改状态后 DOM 还没更新（同步的），nextTick 里拿到的才是新 DOM
+count.value++
+console.log(document.getElementById('n')?.textContent) // 旧值
+await nextTick()
+console.log(document.getElementById('n')?.textContent) // 新值
+
+// 循环改状态：Vue 会合并成一次更新（批量异步），所以 for 里改 100 次 ref 也只渲染一次
+// 但 watch 默认也是批量回调 —— flush: 'sync' 才是逐次触发（慎用）
+
+// props 的更新粒度：父组件重渲染 → 子组件只要 props 引用没变，v-memo/纯展示优化就能跳过

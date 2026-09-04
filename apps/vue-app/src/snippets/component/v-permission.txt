@@ -1,0 +1,16 @@
+// v-permission：按钮级权限指令（RBAC 的按钮级控制优雅实现）
+// directives/permission.ts
+export const vPermission = {
+  mounted(el: HTMLElement, binding: DirectiveBinding) {
+    const perms = useUserStore().permissions  // ['product:delete', ...]
+    if (!perms.includes(binding.value)) {
+      el.parentNode?.removeChild(el)           // 无权限：直接从 DOM 移除
+    }
+  },
+}
+
+// 使用：比每处 v-if="perms.includes(...)" 干净得多
+<el-button v-permission="'product:delete'">删除</el-button>
+
+// 常用自定义指令清单：v-debounce（防抖提交）、v-loading、v-focus、v-lazy（图片懒加载）
+// 本项目后面做 RBAC 和性能专题时会真实封装 v-permission 与 v-lazy

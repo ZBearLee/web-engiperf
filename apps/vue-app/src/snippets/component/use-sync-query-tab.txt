@@ -1,0 +1,14 @@
+// composables/useSyncQueryTab.ts —— 本项目真实代码
+// 三个专题页都在用：el-tabs 激活态同步到 ?tab=（刷新不丢、可分享定位）
+export function useSyncQueryTab(defaultTab: string) {
+  const route = useRoute()
+  const router = useRouter()
+  return computed({
+    get: () => (typeof route.query.tab === 'string' && route.query.tab) || defaultTab,
+    set: (v: string) => router.replace({ query: { ...route.query, tab: v } }),
+  })
+}
+
+// 页面里一行接入，组件里只剩 UI：
+const activeTab = useSyncQueryTab('basic')
+// <el-tabs v-model="activeTab">

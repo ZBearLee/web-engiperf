@@ -1,0 +1,12 @@
+<!-- 子组件：双 v-model（Vue3 支持同时绑定多个） -->
+<script setup lang="ts">
+// v-model:firstName → prop 名 firstName + 事件 update:firstName
+const firstName = defineModel<string>('firstName')
+const lastName = defineModel<string>('lastName')
+// defineModel 是 3.4+ 的语法糖，等价于：
+// const props = defineProps<{ firstName: string }>()
+// const emit = defineEmits<{ 'update:firstName': [v: string] }>()
+</script>
+
+<!-- 父组件：像原生属性一样自然 -->
+<NameInput v-model:firstName="form.first" v-model:lastName="form.last" />

@@ -1,0 +1,6 @@
+<!-- 受控 + 非受控混合的 Input：有 v-model 就听外部的，没有就自己管 -->
+<script setup lang="ts">
+const model = defineModel<string>()          // 受控：外部传了 v-model 就绑定它
+const modelModifiers = defineModel<string>() // 还能拿到 .trim/.lazy 等修饰符
+const inner = ref(props.initialValue ?? '')  // 非受控：外部没接管时的内部初值
+</script>

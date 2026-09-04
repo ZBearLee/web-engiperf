@@ -1,0 +1,15 @@
+<!-- 命名空间组件：对象形式导出有层级关系的子组件 -->
+<script setup lang="ts">
+import Table from './Table.vue'
+import TableColumn from './TableColumn.vue'
+const ElTableComp = Object.assign(Table, { Column: TableColumn })
+</script>
+
+<!-- 使用方：API 自文档化，层级关系一目了然 -->
+<Table :data="rows">
+  <Table.Column prop="name" label="名称" />
+  <Table.Column prop="price" label="价格" />
+</Table>
+
+<!-- Element Plus 实际用法：el-table + el-table-column 独立组件靠 provide/inject 通信 -->
+<!-- Form 收集所有 Form.Item 的校验规则同理 —— "容器组件收集子组件"的通用模式 -->

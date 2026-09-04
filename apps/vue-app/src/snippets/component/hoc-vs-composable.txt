@@ -1,0 +1,17 @@
+// Vue2 时代的 HOC：包装组件、注入 loading —— 类型推断地狱、嵌套地狱
+function withLoading(Wrapped) {
+  return defineComponent({
+    data: () => ({ loading: false }),
+    render() { return h(Wrapped, { loading: this.loading }) },
+  })
+}
+
+// Vue3 的替代：一个组合式函数，逻辑平铺、类型自动推断
+function useLoading() {
+  const loading = ref(false)
+  const wrap = async (fn: () => Promise<void>) => {
+    loading.value = true
+    try { await fn() } finally { loading.value = false }
+  }
+  return { loading, wrap }
+}

@@ -1,0 +1,10 @@
+<!-- 动态组件 + KeepAlive：Tab 切换保状态（RouteTopic 的 tabs 就是 component :is） -->
+<RouterView v-slot="{ Component }">
+  <KeepAlive :include="['RouteTopic', 'UserDetail']">
+    <component :is="Component" />
+  </KeepAlive>
+</RouterView>
+
+<!-- include 匹配的是组件 name（不是路由 name！） -->
+<!-- ⚠️ 头号坑：script setup 组件默认没有 name —— 必须 defineOptions({ name: 'Xxx' }) -->
+<!-- 缓存组件的激活/失活钩子：onActivated / onDeactivated（替代部分 onMounted 场景） -->

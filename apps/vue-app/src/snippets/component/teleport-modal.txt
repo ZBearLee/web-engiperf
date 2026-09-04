@@ -1,0 +1,8 @@
+<!-- Modal 的经典问题：父容器 overflow: hidden / z-index 层叠上下文会"吃掉"弹层 -->
+<Teleport to="body">
+  <div class="modal" v-if="visible">...</div>
+</Teleport>
+<!-- 渲染位置在 body 下，但组件的逻辑关系仍留在父组件里 -->
+<!-- 事件冒泡： Teleport 只搬 DOM，Vue 的事件系统仍按组件树冒泡——逻辑不乱 -->
+
+<!-- Element Plus 所有弹层组件（Dialog/Select/Tooltip）内部都是 Teleport，这就是它们不被父容器裁剪的原因 -->

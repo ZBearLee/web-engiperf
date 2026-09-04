@@ -1,0 +1,15 @@
+<!-- 作用域插槽：表格组件把行数据"交还"给父组件渲染 -->
+<!-- 子组件 CompareTable 概念版 -->
+<template v-for="row in rows">
+  <slot name="cell" :row="row" :index="i">
+    <!-- fallback：父组件没接管时用默认渲染 -->
+    {{ row[col.prop] }}
+  </slot>
+</template>
+
+<!-- 父组件：拿到 row 自定义单元格（按状态渲染彩色 tag） -->
+<CompareTable :rows="products">
+  <template #cell="{ row }">
+    <el-tag :type="row.status === 1 ? 'success' : 'danger'">{{ row.statusLabel }}</el-tag>
+  </template>
+</CompareTable>

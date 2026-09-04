@@ -1,0 +1,7 @@
+<!-- v-memo：依赖数组不变则整棵子树跳过 diff（长列表的精准优化） -->
+<div v-for="item in items" :key="item.id" v-memo="[item.selected, item.updatedAt]">
+  <!-- 这个子树很大时，只有 selected/updatedAt 变了才重新渲染该项 -->
+</div>
+
+<!-- v-once：只渲染一次，之后任何更新都跳过（真正的静态内容） -->
+<h1 v-once>{{ appTitle }}</h1>

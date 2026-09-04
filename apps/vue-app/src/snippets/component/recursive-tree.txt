@@ -1,0 +1,15 @@
+<!-- TreeItem.vue：组件调用自身渲染树形结构 -->
+<script setup lang="ts">
+import { defineProps } from 'vue'
+// 递归组件必须显式命名（script setup 默认无 name，靠文件名推断在递归场景不可靠）
+defineOptions({ name: 'TreeItem' })
+defineProps<{ node: TreeNode }>()
+</script>
+
+<template>
+  <div class="tree-item">
+    <span>{{ node.label }}</span>
+    <!-- 自引用：直接用组件名，无需 import 自己 -->
+    <TreeItem v-for="child in node.children" :key="child.id" :node="child" />
+  </div>
+</template>
