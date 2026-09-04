@@ -5,7 +5,7 @@ import { ElMessageBox } from 'element-plus'
 import DemoBlock from '@/components/DemoBlock.vue'
 import HintText from '@/components/HintText.vue'
 import PageCard from '@/components/PageCard.vue'
-import { pushGuardLog } from '@/router/guardLog'
+import { guardFormBeforeRouteLeave } from '@/router/guardHooks'
 
 /** 模拟未保存表单 */
 const draft = ref('')
@@ -17,20 +17,17 @@ const dirty = () => draft.value !== saved.value
  * 组件内守卫：离开当前页前拦截
  * 真实场景：表单有未保存修改、支付流程中途离开、编辑器内容未提交
  */
-onBeforeRouteLeave(async (to, from) => {
-  pushGuardLog('③ beforeRouteLeave（组件内）', from.path, to.path)
-  if (!dirty()) return true
-  try {
-    await ElMessageBox.confirm('表单有未保存的修改，确定离开吗？', '未保存提示', {
-      confirmButtonText: '离开',
-      cancelButtonText: '留下',
-      type: 'warning',
-    })
-    return true // 确认离开
-  } catch {
-    return false // 取消 → 阻止导航
-  }
-})
+onBeforeRouteLeave((to, from) =>
+  guardFormBeforeRouteLeave(to, from, {
+    isDirty: dirty,
+    confirm: () =>
+      ElMessageBox.confirm('表单有未保存的修改，确定离开吗？', '未保存提示', {
+        confirmButtonText: '离开',
+        cancelButtonText: '留下',
+        type: 'warning',
+      }),
+  }),
+)
 
 const save = () => {
   saved.value = draft.value
