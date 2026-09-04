@@ -11,9 +11,11 @@
     "dev:server": "pnpm --filter @web-engiperf/db build && pnpm --filter @web-engiperf/server start:dev",
     "build:server": "pnpm --filter @web-engiperf/db build && pnpm --filter @web-engiperf/server build",
     "seed": "pnpm --filter @web-engiperf/db seed",
-    "clean": "pnpm -r exec rimraf dist .next .turbo node_modules"
+    "clean": "pnpm -r exec rimraf dist .next .turbo node_modules",
+    "dev": "concurrently -n web,api -c cyan,green \"pnpm --filter vue-app dev\" \"pnpm dev:server\""
   },
   "devDependencies": {
+    "concurrently": "^10.0.5",
     "typescript": "^5.6.3"
   }
 }
