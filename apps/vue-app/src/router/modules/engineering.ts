@@ -21,7 +21,7 @@ export default [
       {
         path: 'testing',
         name: 'auto-testing',
-        component: () => import('@/views/engineering/testing/Testing.vue'),
+        component: () => import('@/views/engineering/testing/TestingGuide.vue'),
         meta: { title: '自动化测试', icon: '', order: 2 },
       },
     ],

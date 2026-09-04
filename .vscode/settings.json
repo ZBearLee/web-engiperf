@@ -1,0 +1,19 @@
+{
+  // 仓库根目录的 VSCode 配置：从根目录打开工作区时生效。
+  // 注意 apps/vue-app/.vscode/settings.json 是脚手架生成的，仅在该目录作为工作区根时生效，
+  // 从仓库根打开时它不会被读取——所以根目录必须有这一份，否则 ESLint 插件拿不到配置，
+  // 写代码时看不到红线（这是 IDE 实时校验失效的常见原因）。
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.oxlint": "explicit"
+  },
+  // 项目用 ESLint flat config（eslint.config.ts），必须显式开启
+  "eslint.useFlatConfig": true,
+  // monorepo：eslint 配置在 apps/vue-app 下，需指定工作目录，否则插件报找不到 flat config
+  "eslint.workingDirectories": ["apps/vue-app"],
+  "eslint.validate": ["javascript", "typescript", "vue"],
+  // oxlint 实时提示（更快，与 eslint 互补）
+  "oxc.lint.enable": true
+}

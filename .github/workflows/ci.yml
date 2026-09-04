@@ -1,0 +1,95 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# 同一分支上新的推送会取消旧的未完成任务，避免排队浪费
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # 阶段一：质量门禁（不通过则不部署）
+  quality:
+    name: 质量门禁（lint / type-check / test）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm --filter vue-app lint
+
+      - name: 类型检查
+        run: pnpm --filter vue-app type-check
+
+      - name: 单元测试（前端）
+        run: pnpm --filter vue-app test:unit run
+
+      # 后端的 prisma.service.ts 直接 import '@web-engiperf/db'，
+      # 而该包 exports 指向 ./dist —— 必须先 build，否则全新环境里后端测试解析失败
+      - name: 构建 db 包（后端测试的前置依赖）
+        run: pnpm --filter @web-engiperf/db build
+
+      - name: Lint（后端）
+        run: pnpm --filter @web-engiperf/server lint
+
+      - name: 单元测试（后端）
+        run: pnpm --filter @web-engiperf/server test
+
+  # 阶段二：部署前端到 Vercel（仅 main 分支推送，且门禁通过）
+  deploy:
+    name: 部署前端到 Vercel
+    needs: quality
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      - name: 安装 Vercel CLI
+        run: npm install -g vercel@latest
+
+      # vercel pull 会在 apps/vue-app 下生成 .vercel/ 项目配置（build/deploy 需要它）
+      - name: 拉取 Vercel 项目配置
+        working-directory: apps/vue-app
+        run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+
+      # 先本地构建产物，再由下面的 --prebuilt 直接上传：
+      # 这样部署内容完全由本流水线决定，不依赖 Vercel 自己的构建环境
+      - name: 构建前端产物
+        working-directory: apps/vue-app
+        run: vercel build --prod --token=$VERCEL_TOKEN
+
+      - name: 部署到生产环境
+        working-directory: apps/vue-app
+        run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN

@@ -22,7 +22,7 @@ export default [
           {
             path: '', // 完整路径 /architecture/routes（空 path 子路由 = 默认子页）
             name: 'routes',
-            component: () => import('@/views/architecture/routes/Routes.vue'),
+            component: () => import('@/views/architecture/routes/RouteDemo.vue'),
           },
           {
             path: 'user/:id',

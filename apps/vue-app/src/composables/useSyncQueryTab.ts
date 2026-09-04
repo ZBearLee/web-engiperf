@@ -5,7 +5,7 @@ import { useRoute, useRouter } from 'vue-router'
  * useSyncQueryTab：页内 el-tabs 激活态与 route.query 同步的组合式函数。
  *
  * 为什么抽成 composable（组件封装第一层知识点）：
- * - 这段逻辑在 Routes / ComponentDesign 等多个专题页重复出现 —— 逻辑与视图分离后，任何页面一行接入
+ * - 这段逻辑在 RouteDemo / ComponentDesign 等多个专题页重复出现 —— 逻辑与视图分离后，任何页面一行接入
  * - 组件里只留 UI（el-tabs），"tab 状态放哪、怎么恢复"变成可复用、可单测的纯逻辑单元
  *
  * 用法：const activeTab = useSyncQueryTab('basic')  →  <el-tabs v-model="activeTab">
