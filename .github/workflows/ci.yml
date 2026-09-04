@@ -79,7 +79,13 @@ jobs:
       - name: 安装 Vercel CLI
         run: npm install -g vercel@latest
 
-      # vercel pull 会在 apps/vue-app 下生成 .vercel/ 项目配置（build/deploy 需要它）
+      # 干净 CI 环境无 .vercel 关联，先用精确的 org/project id 显式 link，
+      # 否则 vercel pull 会报 "Could not retrieve Project Settings"（env 变量关联不稳）
+      - name: 关联 Vercel 项目
+        working-directory: apps/vue-app
+        run: vercel link --yes --token=$VERCEL_TOKEN --scope=$VERCEL_ORG_ID --project=$VERCEL_PROJECT_ID
+
+      # vercel pull 拉取项目配置（build/deploy 需要它）
       - name: 拉取 Vercel 项目配置
         working-directory: apps/vue-app
         run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
