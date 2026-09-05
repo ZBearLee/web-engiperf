@@ -15,6 +15,11 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
+    /* 路径别名 @/ -> src/（必须与 vite.config.ts 的 resolve.alias 保持一致）
+       TS 6.0 起 baseUrl 已废弃，paths 直接写相对本文件的路径 */
+    "paths": {
+      "@/*": ["./src/*"]
+    },
 
     /* Linting */
     "noUnusedLocals": true,

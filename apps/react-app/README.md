@@ -1,32 +1,15 @@
-# React + TypeScript + Vite
+# React 子应用
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+和 vue-app 结构对称，用来做 Vue 与 React 的对比学习。
 
-Currently, two official plugins are available:
+技术栈：Vite 8 / React 19 / TypeScript 6 / React Router 7 / Zustand / Ant Design 6 / Sass / oxlint / Prettier
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+常用命令：
+- `pnpm --filter react-app dev`：本地开发，端口 5174
+- `pnpm --filter react-app build`：构建
+- `pnpm --filter react-app lint`：修复式 lint（oxlint --fix）
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+约定：
+- 菜单和面包屑由路由配置在运行时派生，不用单独维护一份菜单配置。
+- 一个菜单对应 views/ 下的一个目录，私有子组件收进同级 `_components/`。
+- 页面用 `React.lazy` 按路由懒加载。

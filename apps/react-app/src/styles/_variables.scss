@@ -1,0 +1,37 @@
+// 设计变量：与 Ant Design 默认 token 对齐，避免两套色值打架
+
+// —— 主色 / 语义色 ——
+$color-primary: #1677ff;
+$color-success: #52c41a;
+$color-warning: #faad14;
+$color-error: #ff4d4f;
+
+// —— 文本 ——
+$text-color: rgba(0, 0, 0, 0.88);
+$text-color-secondary: rgba(0, 0, 0, 0.65);
+$text-color-tertiary: rgba(0, 0, 0, 0.45);
+
+// —— 边框 / 背景 ——
+$border-color: rgba(5, 5, 5, 0.06);
+$bg-layout: #f5f5f5;
+$bg-container: #ffffff;
+
+// —— 字号 ——
+$font-size-sm: 12px;
+$font-size-base: 14px;
+$font-size-lg: 16px;
+
+// —— 圆角 ——
+$radius-sm: 4px;
+$radius-base: 8px;
+
+// —— 间距 ——
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 24px;
+
+// —— 布局尺寸（与 BasicLayout 保持一致） ——
+$sider-width: 200px;
+$header-height: 56px;
+$content-padding: 16px;

@@ -1,0 +1,68 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ——— 基础重置 ———
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  font-size: $font-size-base;
+  color: $text-color;
+  background: $bg-layout;
+}
+
+// 行内代码
+code {
+  padding: 2px 6px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 13px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: $radius-sm;
+}
+
+// ——— 侧边栏菜单紧凑化（覆盖 Ant Design 默认尺寸） ———
+.ant-menu-inline {
+  .ant-menu-item,
+  .ant-menu-submenu-title {
+    height: 36px !important;
+    line-height: 36px !important;
+    margin-block: 2px !important;
+  }
+
+  &.ant-menu-root .ant-menu-submenu-title {
+    margin-block: 2px !important;
+  }
+}
+
+// ——— 通用工具类（嵌套写法示例） ———
+.util {
+  &-ellipsis {
+    @include ellipsis();
+  }
+
+  &-clamp-2 {
+    @include ellipsis(2);
+  }
+
+  &-flex-between {
+    @include flex(center, space-between, $space-sm);
+  }
+
+  &-card {
+    @include card-block();
+  }
+
+  &-clickable {
+    @include clickable();
+  }
+}

@@ -9,7 +9,10 @@
     "build-only": "vite build",
     "preview": "vite preview",
     "type-check": "tsc -b",
-    "lint": "oxlint"
+    "lint": "oxlint . --fix",
+    "lint:check": "oxlint .",
+    "format": "prettier --write --experimental-cli src/",
+    "format:check": "prettier --check --experimental-cli src/"
   },
   "dependencies": {
     "@ant-design/icons": "^6.3.4",
@@ -25,6 +28,8 @@
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^6.1.0",
     "oxlint": "^1.79.0",
+    "prettier": "3.9.5",
+    "sass-embedded": "^1.104.0",
     "typescript": "~6.0.2",
     "vite": "^8.2.2"
   }

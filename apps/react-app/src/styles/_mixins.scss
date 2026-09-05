@@ -1,0 +1,44 @@
+@use 'variables' as *;
+
+/// 文本省略：$lines = 1 单行省略，>1 多行截断
+@mixin ellipsis($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/// flex 快捷写法
+@mixin flex($align: center, $justify: flex-start, $gap: 0) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+/// 白色卡片容器（与内容区卡片风格一致）
+@mixin card-block($padding: $space-md) {
+  padding: $padding;
+  background: $bg-container;
+  border-radius: $radius-base;
+}
+
+/// 可点击元素的基础交互
+@mixin clickable {
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
