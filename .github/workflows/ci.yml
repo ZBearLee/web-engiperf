@@ -79,23 +79,23 @@ jobs:
       - name: 安装 Vercel CLI
         run: npm install -g vercel@latest
 
+      # 关键：Vercel 项目已设置 Root Directory = apps/vue-app，CLI 会据此自行定位子项目。
+      # 所以这些命令必须在「仓库根」执行，不能再手动切到 apps/vue-app ——
+      # 否则 CLI 会把 Root Directory 再叠加一层，变成 apps/vue-app/apps/vue-app 而报「路径不存在」。
+
       # 干净 CI 环境无 .vercel 关联，先用精确的 org/project id 显式 link，
       # 否则 vercel pull 会报 "Could not retrieve Project Settings"（env 变量关联不稳）
       - name: 关联 Vercel 项目
-        working-directory: apps/vue-app
         run: vercel link --yes --token=$VERCEL_TOKEN --scope=$VERCEL_ORG_ID --project=$VERCEL_PROJECT_ID
 
       # vercel pull 拉取项目配置（build/deploy 需要它）
       - name: 拉取 Vercel 项目配置
-        working-directory: apps/vue-app
         run: vercel pull --yes --environment=production --token=$VERCEL_TOKEN
 
       # 先本地构建产物，再由下面的 --prebuilt 直接上传：
       # 这样部署内容完全由本流水线决定，不依赖 Vercel 自己的构建环境
       - name: 构建前端产物
-        working-directory: apps/vue-app
         run: vercel build --prod --token=$VERCEL_TOKEN
 
       - name: 部署到生产环境
-        working-directory: apps/vue-app
         run: vercel deploy --prebuilt --prod --token=$VERCEL_TOKEN
