@@ -2,7 +2,7 @@ import { RightOutlined } from '@ant-design/icons'
 import { Button, Card, Divider, Space, Tag, Typography } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const { Title, Paragraph, Text } = Typography
+const { Paragraph, Text } = Typography
 
 // 代码块统一样式
 const code = (src: string) => (
