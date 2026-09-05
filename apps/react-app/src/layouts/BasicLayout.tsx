@@ -21,8 +21,16 @@ export default function BasicLayout() {
   const openKeys = crumbs[0]?.path ? [crumbs[0].path] : []
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider trigger={null} collapsible collapsed={collapsed} width={200}>
+    // 整页固定一屏，不外溢滚动
+    <Layout style={{ height: '100vh', overflow: 'hidden' }}>
+      {/* 侧边栏固定，菜单过长时自身滚动 */}
+      <Sider
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        width={200}
+        style={{ height: '100vh', overflow: 'auto', borderRight: 0 }}
+      >
         <div
           style={{
             height: 56,
@@ -52,7 +60,8 @@ export default function BasicLayout() {
         />
       </Sider>
 
-      <Layout style={{ background: colorBgLayout }}>
+      {/* 右侧列固定一屏，仅内容区滚动 */}
+      <Layout style={{ background: colorBgLayout, height: '100vh', overflow: 'hidden' }}>
         <Header
           style={{
             display: 'flex',
@@ -75,11 +84,11 @@ export default function BasicLayout() {
           <Breadcrumb items={crumbs.map((c) => ({ title: c.title }))} />
         </Header>
 
-        <Content style={{ padding: 16 }}>
+        <Content style={{ padding: 16, overflow: 'auto', flex: 1 }}>
           <div
             style={{
               padding: 20,
-              minHeight: 360,
+              minHeight: '100%',
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
               boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04)',
