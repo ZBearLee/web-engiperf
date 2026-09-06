@@ -1,5 +1,5 @@
 import { RightOutlined } from '@ant-design/icons'
-import { Button, Card, Divider, Space, Tag, Typography } from 'antd'
+import { Button, Card, Divider, Space, Typography } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const { Paragraph, Text } = Typography

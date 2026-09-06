@@ -42,7 +42,20 @@ export default [
           },
         ],
       },
-      // 后续专题在这里追加：views/architecture/<菜单>/ 一个目录即一个菜单单元，不再往下拆子目录
+      // 接口请求封装：API 层 / 容灾，独立菜单项
+      {
+        path: 'request',
+        name: 'request-demo',
+        component: () => import('@/views/architecture/request/RequestDemo.vue'),
+        meta: { title: '接口请求封装', icon: '', order: 2 },
+      },
+      // 兜底策略：容灾与降级，独立菜单项
+      {
+        path: 'fallback',
+        name: 'fallback-demo',
+        component: () => import('@/views/architecture/fallback/FallbackDemo.vue'),
+        meta: { title: '兜底策略', icon: '', order: 3 },
+      },
     ],
   },
 ] satisfies RouteRecordRaw[]
